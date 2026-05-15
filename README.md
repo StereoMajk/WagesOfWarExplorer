@@ -2,6 +2,8 @@
 
 A WPF file browser for the game data of **Wages of War: The Business of Battle** (1996, New World Computing).
 
+![Explorer screenshot](screenshots/screenshot.png)
+
 ## What it does
 
 Browses the extracted installer groups and ISO game files, detecting and rendering each format natively:

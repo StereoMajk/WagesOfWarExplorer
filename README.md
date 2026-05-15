@@ -1,35 +1,12 @@
 # Wages of War Explorer
 
-A WPF file browser for the game data of **Wages of War: The Business of Battle** (1996, New World Computing).
+A file browser for the game data of **Wages of War: The Business of Battle** (1996, New World Computing).
 
 ![Explorer screenshot](screenshots/screenshot.png)
 
 ## What it does
 
 Browses the extracted installer groups and ISO game files, detecting and rendering each format natively:
-
-| Format | Viewer |
-|---|---|
-| PCX images | Decoded and displayed as WPF images |
-| Engine archives (.obj/.spr, MISC.DAT, OFFCSPR.DAT) | Tree of contained sprites/frames |
-| VALS containers (.VLS/.VLA) | Waveform strips + embedded WAV playback |
-| Standalone WAV audio | Waveform + play/stop controls |
-| MIDI | Hex preview |
-| Bitmap fonts (.CHR) | Glyph grid |
-| MS Write documents (.WRI) | Plain-text extraction |
-| OLE compound documents | Hex preview |
-| Win32 PE binaries (.EXE/.DLL/.DRV) | Hex preview |
-| Windows ICO/CUR | WPF image decode |
-| Mission scripts (.VAL/.TXT) | Text viewer |
-| Sprite correlation tables (.COR) | Text viewer |
-| UI button layouts (.BTN) | Text viewer |
-| Weapon shop inventories (.DAT) | Text viewer |
-| AI waypoint lists (.DAT) | Text viewer |
-| Mission setup files (.DAT) | Text viewer |
-| Speech scripts (.DAT) | Text viewer |
-| Generic text files | Text viewer |
-
-The **By Type** view groups all files across all extracted groups by detected format.
 
 ## Requirements
 

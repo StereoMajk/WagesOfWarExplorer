@@ -1,0 +1,80 @@
+﻿<Window x:Class="WagesOfWar.Explorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WagesOfWar.Explorer"
+        Title="Wages of War — File Explorer" Height="800" Width="1280">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open Folder…" Click="OpenFolder_Click"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Refresh" Click="Refresh_Click" InputGestureText="F5"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem><TextBlock x:Name="StatusText" Text="Ready"/></StatusBarItem>
+            <Separator/>
+            <StatusBarItem><TextBlock x:Name="RootText"/></StatusBarItem>
+        </StatusBar>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="2,2,2,0">
+                    <RadioButton x:Name="ByTypeRadio" Content="By Type" IsChecked="True"
+                                 GroupName="ViewMode" Margin="2"
+                                 Checked="ViewMode_Changed"/>
+                    <RadioButton x:Name="ByFolderRadio" Content="By Folder"
+                                 GroupName="ViewMode" Margin="2"
+                                 Checked="ViewMode_Changed"/>
+                </StackPanel>
+                <TextBox x:Name="FilterBox" DockPanel.Dock="Top" Margin="2"
+                         ToolTip="Filter (substring)" TextChanged="FilterBox_TextChanged"/>
+                <TreeView x:Name="FileTree" SelectedItemChanged="FileTree_SelectedItemChanged">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Icon}" Margin="0,0,4,0"/>
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding SizeText}" Foreground="Gray" Margin="6,0,0,0"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </DockPanel>
+
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch"
+                          Background="#FFDDDDDD"/>
+
+            <DockPanel Grid.Column="2">
+                <Border DockPanel.Dock="Top" BorderBrush="#FFCCCCCC" BorderThickness="0,0,0,1" Padding="6">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="SelectedPathText" FontWeight="Bold"/>
+                        <TextBlock x:Name="DetectedFormatText" Margin="20,0,0,0" Foreground="DarkSlateBlue"/>
+                    </StackPanel>
+                </Border>
+                <ContentControl x:Name="ViewerHost"/>
+            </DockPanel>
+
+            <!-- Loading overlay (shown while archives are being parsed) -->
+            <Grid x:Name="LoadingOverlay" Grid.ColumnSpan="3"
+                  Visibility="Collapsed"
+                  Background="#B0FFFFFF">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="260">
+                    <TextBlock x:Name="LoadingText" Text="Loading…"
+                               HorizontalAlignment="Center" FontSize="15" FontWeight="SemiBold"
+                               Margin="0,0,0,12"/>
+                    <ProgressBar IsIndeterminate="True" Height="8"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
